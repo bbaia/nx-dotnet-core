@@ -1,0 +1,79 @@
+{
+  "version": 2,
+  "projects": {
+    "nx-dotnet-core": {
+      "root": "packages/nx-dotnet-core",
+      "sourceRoot": "packages/nx-dotnet-core/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "packages/nx-dotnet-core/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/packages/nx-dotnet-core"
+          ],
+          "options": {
+            "jestConfig": "packages/nx-dotnet-core/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/packages/nx-dotnet-core",
+            "tsConfig": "packages/nx-dotnet-core/tsconfig.lib.json",
+            "packageJson": "packages/nx-dotnet-core/package.json",
+            "main": "packages/nx-dotnet-core/src/index.ts",
+            "assets": [
+              "packages/nx-dotnet-core/*.md",
+              {
+                "input": "./packages/nx-dotnet-core/src",
+                "glob": "**/*.!(ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/nx-dotnet-core",
+                "glob": "generators.json",
+                "output": "."
+              },
+              {
+                "input": "./packages/nx-dotnet-core",
+                "glob": "executors.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "nx-dotnet-core-e2e": {
+      "projectType": "application",
+      "root": "e2e\\nx-dotnet-core-e2e",
+      "sourceRoot": "e2e\\nx-dotnet-core-e2e/src",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/nx-plugin:e2e",
+          "options": {
+            "target": "nx-dotnet-core:build",
+            "npmPackageName": "@bbaia/nx-dotnet-core",
+            "pluginOutputPath": "dist/packages/nx-dotnet-core",
+            "jestConfig": "e2e/nx-dotnet-core-e2e/jest.config.js"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/workspace"
+  }
+}
