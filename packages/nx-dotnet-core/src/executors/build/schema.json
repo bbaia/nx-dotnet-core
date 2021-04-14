@@ -4,6 +4,19 @@
   "title": "Build executor",
   "description": "",
   "type": "object",
-  "properties": {},
-  "required": []
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The project to publish. If a file is not specified, the command will search the current directory for one."
+    },
+    "outputPath": {
+      "type": "string",
+      "description": "The output directory to place the generated artifacts in."
+    },
+    "configuration": {
+      "type": "string",
+      "description": "The configuration to build for. The default for most projects is 'Debug'."
+    }
+  },
+  "required": ["project", "outputPath"]
 }

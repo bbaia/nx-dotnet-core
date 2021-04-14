@@ -3,10 +3,10 @@
   "name": "nx-dotnet-core",
   "version": "0.0.1",
   "generators": {
-    "nx-dotnet-core": {
-      "factory": "./src/generators/nx-dotnet-core/generator",
-      "schema": "./src/generators/nx-dotnet-core/schema.json",
-      "description": "nx-dotnet-core generator"
+    "new": {
+      "factory": "./src/generators/new/generator",
+      "schema": "./src/generators/new/schema.json",
+      "description": "new generator"
     }
   }
 }

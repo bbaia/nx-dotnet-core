@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "title": "Test executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The project to test. If a file is not specified, the command will search the current directory for one."
+    },
+    "watch": {
+      "type": "boolean",
+      "description": "Watch files for changes and rerun tests.",
+      "default": false
+    }
+  },
+  "required": ["project"]
+}

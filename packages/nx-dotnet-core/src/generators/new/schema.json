@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "id": "NxDotNetCoreNew",
+  "title": "Create a .NET Core application or library for Nx.",
+  "type": "object",
+  "examples": [
+    {
+      "command": "generate @bbaia/nx-dotnet-core:new app webapi my-app",
+      "description": "Generate ASP.NET Core Web API solution in 'apps/my-app'."
+    }
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "The type of the project in the workspace.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": {
+        "message": "What kind of project would you like to generate?",
+        "type": "list",
+        "items": ["app", "lib"]
+      }
+    },
+    "template": {
+      "type": "string",
+      "description": "The .NET Core template to instantiate when the `dotnet new`command is invoked.",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "What .NET Core template would you like to use? (Use `dotnet new --list --type=Project` to list all installed project templates)"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      },
+      "x-prompt": "What name would you like to use?"
+    },
+    "tags": {
+      "type": "string",
+      "description": "Add tags to the project (used for linting).",
+      "alias": "t"
+    },
+    "directory": {
+      "type": "string",
+      "description": "A directory where the project is placed.",
+      "alias": "d"
+    },
+    "unitTestTemplate": {
+      "type": "string",
+      "description": "The .NET Core template to use for unit tests (ex: 'mstest', 'nunit', 'xunit')."
+    }
+  },
+  "required": ["type", "template", "name"]
+}

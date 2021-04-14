@@ -1,85 +1,67 @@
+# Nx Plugin for .NET Core
 
+> [Nx Plugin](https://nx.dev) to generate, run, build and test [.NET Core](https://dotnet.microsoft.com/) projects inside your Nx workspace.
 
-# Bbaia
-
-This project was generated using [Nx](https://nx.dev).
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+<p style="text-align: center;"><img src="https://raw.githubusercontent.com/bbaia/nx-dotnet-core/master/images/nx-dotnet-core-logo.png" width="450"></p>
 
 🔎 **Powerful, Extensible Dev Tools**
 
-## Adding capabilities to your workspace
+## Prerequisite
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+If you have not already:
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+- [Install .NET core](https://docs.microsoft.com/en-us/dotnet/core/install/)
+- [Create an Nx workspace](https://github.com/nrwl/nx#creating-an-nx-workspace)
 
-Below are our core plugins:
+## Getting Started
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+### Install Plugin
 
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
+```
+npm install @bbaia/nx-dotnet-core --save-dev
+```
 
-## Generate an application
+### Generate a project
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+Run `nx g @bbaia/nx-dotnet-core:new` to generate a project using the [`dotnet new`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new) command.
 
-> You can use any of the plugins above to generate applications as well.
+You will be prompted for entering:
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+- The type of project (`application` or `library`)
+- The .NET Core template to use (Use `dotnet new --list --type=Project` to list all installed project templates)
+- The name of your project
 
-## Generate a library
+You can skip the interactive prompt or customize all non-prompted options from the command line:
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+```
+nx g @bbaia/nx-dotnet-core:new <app|lib> <.NET Core template> <your-project-name> --optionName optionValue
+```
 
-> You can also use any of the plugins above to generate libraries as well.
+| Option             | Value    | Description                                                                    |
+| ------------------ | -------- | ------------------------------------------------------------------------------ |
+| `tags`             | `string` | Add tags to the project (used for linting).                                    |
+| `directory`        | `string` | A directory where the project is placed.                                       |
+| `unitTestTemplate` | `string` | The .NET Core template to use for unit tests (ex: 'mstest', 'nunit', 'xunit'). |
 
-Libraries are shareable across libraries and applications. They can be imported from `@bbaia/mylib`.
+> Use [Nx Console](https://nx.dev/latest/angular/getting-started/console) to spend less time looking up command line arguments!
 
-## Development server
+Exemple to generate an ASP.NET Core Web API project with an NUnit test project :
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+```
+nx g @bbaia/nx-dotnet-core:new app webapi api --unitTestTemplate nunit
+```
 
-## Code scaffolding
+### Manage a project
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+- Run `ng serve api` to serve the app. The app will automatically reload if you change any of the source files.
+- Run `ng build api` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- Run `nx test api` to execute the unit tests via `nunit`. Use the `--watch` flag to watch files for changes and rerun tests.
 
-## Build
-
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
+You will find more information on the generated `README.md` file.
 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
 
 ## ☁ Nx Cloud
 

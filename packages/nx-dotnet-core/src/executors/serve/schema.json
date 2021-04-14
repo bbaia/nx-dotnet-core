@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "title": "Serve executor",
+  "description": "Builds and serves your app, rebuilding on file changes.",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The project to serve. If a file is not specified, the command will search the current directory for one."
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Show verbose output."
+    }
+  },
+  "required": ["project"]
+}

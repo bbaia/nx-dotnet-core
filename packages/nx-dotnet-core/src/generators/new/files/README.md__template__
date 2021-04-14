@@ -1,0 +1,19 @@
+# <%= name %>
+
+This <%= projectType %> was generated with [Nx](https://nx.dev) and the [.NET Core plugin](https://github.com/bbaia/nx-dotnet-core).
+<% if (canServe) { %>
+
+## Development server
+
+Run `ng serve <%= name %>` to serve the app. The app will automatically reload if you change any of the source files.
+<% } %>
+
+## Build
+
+Run `ng build <%= name %>` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+<% if (hasUnitTests) { %>
+
+## Running unit tests
+
+Run `nx test <%= name %>` to execute the unit tests via `<%= unitTestTemplate %>`. Use the `--watch` flag to watch files for changes and rerun tests.
+<% } %>
