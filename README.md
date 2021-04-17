@@ -1,5 +1,7 @@
 # Nx Plugin for .NET Core
 
+[![unit tests](https://github.com/bbaia/nx-dotnet-core/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/bbaia/nx-dotnet-core/actions/workflows/unit-tests.yml)
+
 > [Nx Plugin](https://nx.dev) to generate, run, build and test [.NET Core](https://dotnet.microsoft.com/) projects inside your Nx workspace.
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/bbaia/nx-dotnet-core/master/images/nx-dotnet-core-logo.png" width="450"></p>
