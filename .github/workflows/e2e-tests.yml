@@ -1,0 +1,51 @@
+name: E2E Tests
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "e2e-test"
+  e2e-test:
+    # The type of runner that the job will run on
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [14.x]
+        dotnet: ['5.0.x']
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Check-out repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+
+      # Fetch origin/master so that we have a base to run the affected commands against
+      - name: Fetch origin/master
+        run: git fetch --no-tags --prune --depth=5 origin master
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm run affected:e2e -- --base=origin/master
