@@ -4,6 +4,7 @@ import {
   readJson,
   readProjectConfiguration,
   Tree,
+  writeJson,
 } from '@nrwl/devkit';
 
 import { dotnet } from '../../utils';
@@ -328,6 +329,46 @@ describe('new generator', () => {
           }),
         }),
       );
+    });
+  });
+
+  describe('Visual Studio Code extension', () => {
+    const options: NewGeneratorSchema = {
+      type: 'app',
+      template: 'webapi',
+      name: 'my-app',
+    };
+
+    it('should add C# extension', async () => {
+      // createTreeWithEmptyWorkspace does not generate '.vscode/extensions.json'
+      writeJson(tree, '.vscode/extensions.json', {
+        recommendations: ['nrwl.angular-console', 'esbenp.prettier-vscode'],
+      });
+
+      await generator(tree, options);
+
+      const extensionsJson = readJson(tree, '.vscode/extensions.json');
+      expect(extensionsJson.recommendations).toContain('ms-dotnettools.csharp');
+    });
+
+    it('should ensure C# extension', async () => {
+      // createTreeWithEmptyWorkspace does not generate '.vscode/extensions.json'
+      writeJson(tree, '.vscode/extensions.json', {
+        recommendations: [
+          'nrwl.angular-console',
+          'esbenp.prettier-vscode',
+          'ms-dotnettools.csharp',
+        ],
+      });
+
+      await generator(tree, options);
+
+      const extensionsJson = readJson(tree, '.vscode/extensions.json');
+      expect(extensionsJson.recommendations).toEqual([
+        'nrwl.angular-console',
+        'esbenp.prettier-vscode',
+        'ms-dotnettools.csharp',
+      ]);
     });
   });
 });
