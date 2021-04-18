@@ -10,6 +10,7 @@ import {
   readWorkspaceConfiguration,
   TargetConfiguration,
   Tree,
+  updateJson,
   updateWorkspaceConfiguration,
 } from '@nrwl/devkit';
 import * as path from 'path';
@@ -156,10 +157,26 @@ function addFiles(host: Tree, options: NormalizedSchema) {
   );
 }
 
+function addVsCodeExtension(host: Tree) {
+  if (!host.exists('.vscode/extensions.json')) {
+    return;
+  }
+
+  return updateJson(host, '.vscode/extensions.json', json => {
+    json.recommendations = json.recommendations || [];
+    const extension = 'ms-dotnettools.csharp';
+    if (!json.recommendations.includes(extension)) {
+      json.recommendations.push(extension);
+    }
+    return json;
+  });
+}
+
 export default async function (host: Tree, options: NewGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
   addProject(host, normalizedOptions);
   await addDotNetSolution(host, normalizedOptions);
   addFiles(host, normalizedOptions);
+  addVsCodeExtension(host);
   await formatFiles(host);
 }
