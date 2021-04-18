@@ -1,7 +1,26 @@
 {
   "name": "@bbaia/nx-dotnet-core",
   "version": "0.0.1",
-  "main": "src/index.js",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
   "generators": "./generators.json",
-  "executors": "./executors.json"
+  "executors": "./executors.json",
+  "homepage": "https://github.com/bbaia/nx-dotnet-core",
+  "bugs": {
+    "url": "https://github.com/bbaia/nx-dotnet-core/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bbaia/nx-dotnet-core.git"
+  },
+  "author": "Bruno Baia",
+  "keywords": [
+    "dotnet-core",
+    "nx",
+    "nx-plugin"
+  ]
 }
