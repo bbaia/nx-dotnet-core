@@ -1,5 +1,6 @@
 # Nx Plugin for .NET Core
 
+[![npm](https://img.shields.io/npm/v/@bbaia/nx-dotnet-core?style=flat-square)](https://www.npmjs.com/package/@bbaia/nx-dotnet-core)
 [![unit tests](https://github.com/bbaia/nx-dotnet-core/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/bbaia/nx-dotnet-core/actions/workflows/unit-tests.yml)
 [![e2e tests](https://github.com/bbaia/nx-dotnet-core/actions/workflows/e2e-tests.yml/badge.svg)](https://github.com/bbaia/nx-dotnet-core/actions/workflows/e2e-tests.yml)
 
