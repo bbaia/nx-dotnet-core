@@ -66,12 +66,12 @@ describe('new generator', () => {
 
       ## Development server
 
-      Run \`ng serve my-app\` to serve the app. The app will automatically reload if you change any of the source files.
+      Run \`nx serve my-app\` to serve the app. The app will automatically reload if you change any of the source files.
 
 
       ## Build
 
-      Run \`ng build my-app\` to build the project. The build artifacts will be stored in the \`dist/\` directory. Use the \`--prod\` flag for a production build.
+      Run \`nx build my-app\` to build the project. The build artifacts will be stored in the \`dist/\` directory. Use the \`--prod\` flag for a production build.
 
       "
     `);
@@ -178,7 +178,7 @@ describe('new generator', () => {
 
       ## Build
 
-      Run \`ng build my-lib\` to build the project. The build artifacts will be stored in the \`dist/\` directory. Use the \`--prod\` flag for a production build.
+      Run \`nx build my-lib\` to build the project. The build artifacts will be stored in the \`dist/\` directory. Use the \`--prod\` flag for a production build.
 
       "
     `);
@@ -286,7 +286,7 @@ describe('new generator', () => {
 
         ## Build
 
-        Run \`ng build my-lib\` to build the project. The build artifacts will be stored in the \`dist/\` directory. Use the \`--prod\` flag for a production build.
+        Run \`nx build my-lib\` to build the project. The build artifacts will be stored in the \`dist/\` directory. Use the \`--prod\` flag for a production build.
 
 
         ## Running unit tests

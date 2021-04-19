@@ -5,12 +5,12 @@ This <%= projectType %> was generated with [Nx](https://nx.dev) and the [.NET Co
 
 ## Development server
 
-Run `ng serve <%= name %>` to serve the app. The app will automatically reload if you change any of the source files.
+Run `nx serve <%= name %>` to serve the app. The app will automatically reload if you change any of the source files.
 <% } %>
 
 ## Build
 
-Run `ng build <%= name %>` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `nx build <%= name %>` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 <% if (hasUnitTests) { %>
 
 ## Running unit tests
