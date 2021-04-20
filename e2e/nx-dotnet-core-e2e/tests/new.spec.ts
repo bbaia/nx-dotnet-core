@@ -38,7 +38,7 @@ describe('new e2e', () => {
         `dist/packages/${plugin}/web.config`,
       ),
     ).not.toThrow();
-  }, 50000);
+  }, 60000);
 
   it(`should create new library based on 'classlib' template`, async () => {
     const plugin = uniq('lib');
@@ -63,7 +63,7 @@ describe('new e2e', () => {
     expect(() =>
       checkFilesExist(`dist/packages/${plugin}/${names(plugin).className}.dll`),
     ).not.toThrow();
-  }, 50000);
+  }, 60000);
 
   describe('--directory', () => {
     it('should create src in the specified directory', async () => {
@@ -80,7 +80,7 @@ describe('new e2e', () => {
           `apps/subdir/${plugin}/README.md`,
         ),
       ).not.toThrow();
-    }, 50000);
+    }, 60000);
   });
 
   describe('--tags', () => {
@@ -92,7 +92,7 @@ describe('new e2e', () => {
       );
       const nxJson = readJson('nx.json');
       expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
-    }, 50000);
+    }, 60000);
   });
 
   describe('--unitTestTemplate', () => {
@@ -115,6 +115,6 @@ describe('new e2e', () => {
 
       const result = await runNxCommandAsync(`test ${plugin}`);
       expect(result.stdout).toContain('Passed!');
-    }, 50000);
+    }, 90000);
   });
 });
