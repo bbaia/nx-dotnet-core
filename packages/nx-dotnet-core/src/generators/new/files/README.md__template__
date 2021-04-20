@@ -1,6 +1,10 @@
 # <%= name %>
 
 This <%= projectType %> was generated with [Nx](https://nx.dev) and the [.NET Core plugin](https://github.com/bbaia/nx-dotnet-core).
+
+## Restore
+
+Run `nx restore <%= name %>` to restore the dependencies and tools of the project.
 <% if (canServe) { %>
 
 ## Development server

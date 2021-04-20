@@ -16,6 +16,11 @@
     "configuration": {
       "type": "string",
       "description": "The configuration to build for. The default for most projects is 'Debug'."
+    },
+    "noRestore": {
+      "type": "boolean",
+      "description": "Do not restore the project before building your project.",
+      "default": false
     }
   },
   "required": ["project", "outputPath"]

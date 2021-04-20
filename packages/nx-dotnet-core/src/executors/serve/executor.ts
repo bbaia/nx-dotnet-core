@@ -4,6 +4,6 @@ import { ServeExecutorSchema } from './schema';
 export default async function runExecutor(
   options: ServeExecutorSchema,
 ): Promise<{ success: boolean }> {
-  const { project, verbose } = options;
-  return dotnet.watch(project, 'run', verbose);
+  const { project, noRestore, verbose } = options;
+  return dotnet.watch(project, 'run', noRestore, verbose);
 }

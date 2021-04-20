@@ -13,6 +13,11 @@
       "type": "boolean",
       "description": "Watch files for changes and rerun tests.",
       "default": false
+    },
+    "noRestore": {
+      "type": "boolean",
+      "description": "Do not restore the project before running tests.",
+      "default": false
     }
   },
   "required": ["project"]

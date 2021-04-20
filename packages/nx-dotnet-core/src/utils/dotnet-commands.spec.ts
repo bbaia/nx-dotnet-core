@@ -41,6 +41,14 @@ describe('dotnet commands', () => {
     expect(dotnet.spawn).toBeCalledWith(['sln', 'root', 'add', 'root/src']);
   });
 
+  it('restore', () => {
+    const result = dotnet.restore('root/src');
+
+    expect(result).resolves.toEqual({ success: true });
+    expect(dotnet.spawn).toBeCalledTimes(1);
+    expect(dotnet.spawn).toBeCalledWith(['restore', 'root/src']);
+  });
+
   it('watch run', () => {
     const result = dotnet.watch('root/src', 'run');
 
@@ -64,6 +72,21 @@ describe('dotnet commands', () => {
       '--project',
       'root/src',
       'test',
+    ]);
+  });
+
+  it('watch run --no-restore', () => {
+    const result = dotnet.watch('root/src', 'run', true);
+
+    expect(result).resolves.toEqual({ success: true });
+    expect(dotnet.spawn).toBeCalledTimes(1);
+    expect(dotnet.spawn).toBeCalledWith([
+      'watch',
+      '--project',
+      'root/src',
+      'run',
+      '--',
+      '--no-restore',
     ]);
   });
 
@@ -97,11 +120,39 @@ describe('dotnet commands', () => {
     ]);
   });
 
+  it('publish --no-restore', () => {
+    const result = dotnet.publish('root/src', 'dist/my-app', undefined, true);
+
+    expect(result).resolves.toEqual({ success: true });
+    expect(dotnet.spawn).toBeCalledTimes(1);
+    expect(dotnet.spawn).toBeCalledWith([
+      'publish',
+      '--nologo',
+      '--no-restore',
+      '--output',
+      'dist/my-app',
+      'root/src',
+    ]);
+  });
+
   it('test', () => {
     const result = dotnet.test('root/src');
 
     expect(result).resolves.toEqual({ success: true });
     expect(dotnet.spawn).toBeCalledTimes(1);
     expect(dotnet.spawn).toBeCalledWith(['test', '--nologo', 'root/src']);
+  });
+
+  it('test --no-restore', () => {
+    const result = dotnet.test('root/src', true);
+
+    expect(result).resolves.toEqual({ success: true });
+    expect(dotnet.spawn).toBeCalledTimes(1);
+    expect(dotnet.spawn).toBeCalledWith([
+      'test',
+      '--nologo',
+      '--no-restore',
+      'root/src',
+    ]);
   });
 });

@@ -57,6 +57,7 @@ nx g @bbaia/nx-dotnet-core:new app webapi api --unitTestTemplate nunit
 
 ### Manage a project
 
+- Run `nx restore api` to restore the dependencies and tools of the project.
 - Run `nx serve api` to serve the app. The app will automatically reload if you change any of the source files.
 - Run `nx build api` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 - Run `nx test api` to execute the unit tests via `nunit`. Use the `--watch` flag to watch files for changes and rerun tests.

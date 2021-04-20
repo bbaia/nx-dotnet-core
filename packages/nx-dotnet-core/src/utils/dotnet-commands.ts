@@ -36,9 +36,14 @@ async function addProjectToSolution(
   return dotnet.spawn(['sln', solutionPath, 'add', projectPath]);
 }
 
+async function restore(project: string): Promise<{ success: boolean }> {
+  return dotnet.spawn(['restore', project]);
+}
+
 async function watch(
   project: string,
   command: 'run' | 'test',
+  noRestore = false,
   verbose = false,
 ): Promise<{ success: boolean }> {
   const args = ['watch'];
@@ -48,6 +53,10 @@ async function watch(
   args.push('--project');
   args.push(project);
   args.push(command);
+  if (noRestore) {
+    args.push('--');
+    args.push('--no-restore');
+  }
   return dotnet.spawn(args);
 }
 
@@ -55,8 +64,12 @@ async function publish(
   project: string,
   outputPath?: string,
   configuration?: string,
+  noRestore = false,
 ): Promise<{ success: boolean }> {
   const args = ['publish', '--nologo'];
+  if (noRestore) {
+    args.push('--no-restore');
+  }
   if (outputPath) {
     args.push('--output');
     args.push(outputPath);
@@ -69,8 +82,14 @@ async function publish(
   return dotnet.spawn(args);
 }
 
-async function test(project: string): Promise<{ success: boolean }> {
+async function test(
+  project: string,
+  noRestore = false,
+): Promise<{ success: boolean }> {
   const args = ['test', '--nologo'];
+  if (noRestore) {
+    args.push('--no-restore');
+  }
   args.push(project);
   return dotnet.spawn(args);
 }
@@ -80,6 +99,7 @@ export const dotnet = {
   new: dotnetNew,
   addProjectReference,
   addProjectToSolution,
+  restore,
   watch,
   publish,
   test,

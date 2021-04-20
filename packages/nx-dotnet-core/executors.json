@@ -1,6 +1,11 @@
 {
   "$schema": "http://json-schema.org/schema",
   "executors": {
+    "restore": {
+      "implementation": "./src/executors/restore/executor",
+      "schema": "./src/executors/restore/schema.json",
+      "description": "restore executor"
+    },
     "serve": {
       "implementation": "./src/executors/serve/executor",
       "schema": "./src/executors/serve/schema.json",
