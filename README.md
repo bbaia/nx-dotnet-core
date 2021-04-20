@@ -2,8 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/@bbaia/nx-dotnet-core?style=flat-square)](https://www.npmjs.com/package/@bbaia/nx-dotnet-core)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![unit tests](https://github.com/bbaia/nx-dotnet-core/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/bbaia/nx-dotnet-core/actions/workflows/unit-tests.yml)
-[![e2e tests](https://github.com/bbaia/nx-dotnet-core/actions/workflows/e2e-tests.yml/badge.svg)](https://github.com/bbaia/nx-dotnet-core/actions/workflows/e2e-tests.yml)
+[![CI](https://github.com/bbaia/nx-dotnet-core/actions/workflows/ci.yml/badge.svg)](https://github.com/bbaia/nx-dotnet-core/actions/workflows/ci.yml)
 
 > [Nx Plugin](https://nx.dev) to generate, run, build and test [.NET Core](https://dotnet.microsoft.com/) projects inside your Nx workspace.
 
