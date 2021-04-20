@@ -53,6 +53,15 @@ function normalizeOptions(
   };
 }
 
+function getRestoreConfig(options: NormalizedSchema): TargetConfiguration {
+  return {
+    executor: '@bbaia/nx-dotnet-core:restore',
+    options: {
+      project: `${options.projectRoot}`,
+    },
+  };
+}
+
 function getBuildConfig(options: NormalizedSchema): TargetConfiguration {
   return {
     executor: '@bbaia/nx-dotnet-core:build',
@@ -100,6 +109,7 @@ function addProject(host: Tree, options: NormalizedSchema) {
     targets: {},
     tags: options.parsedTags,
   };
+  project.targets.restore = getRestoreConfig(options);
   if (options.projectType === 'application') {
     project.targets.serve = getServeConfig(options);
   }
@@ -162,11 +172,26 @@ function addVsCodeExtension(host: Tree) {
     return;
   }
 
-  return updateJson(host, '.vscode/extensions.json', json => {
+  updateJson(host, '.vscode/extensions.json', json => {
     json.recommendations = json.recommendations || [];
     const extension = 'ms-dotnettools.csharp';
     if (!json.recommendations.includes(extension)) {
       json.recommendations.push(extension);
+    }
+    return json;
+  });
+}
+
+function addPostInstall(host: Tree) {
+  updateJson(host, 'package.json', json => {
+    json.scripts = json.scripts || {};
+    const command = json.scripts.ng
+      ? 'nx affected --target=restore --all'
+      : 'nx restore --all';
+    if (!json.scripts.postinstall) {
+      json.scripts.postinstall = command;
+    } else if (!json.scripts.postinstall.includes(command)) {
+      json.scripts.postinstall = `${json.scripts.postinstall} && ${command}`;
     }
     return json;
   });
@@ -178,5 +203,6 @@ export default async function (host: Tree, options: NewGeneratorSchema) {
   await addDotNetSolution(host, normalizedOptions);
   addFiles(host, normalizedOptions);
   addVsCodeExtension(host);
+  addPostInstall(host);
   await formatFiles(host);
 }

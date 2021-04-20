@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "title": "Restore executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The project to restore. If a file is not specified, the command will search the current directory for one."
+    }
+  },
+  "required": ["project"]
+}

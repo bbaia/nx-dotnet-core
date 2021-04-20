@@ -9,6 +9,11 @@
       "type": "string",
       "description": "The project to serve. If a file is not specified, the command will search the current directory for one."
     },
+    "noRestore": {
+      "type": "boolean",
+      "description": "Do not restore the project before serving your app.",
+      "default": false
+    },
     "verbose": {
       "type": "boolean",
       "description": "Show verbose output."

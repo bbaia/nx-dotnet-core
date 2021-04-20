@@ -59,22 +59,26 @@ describe('new generator', () => {
       expect(tree.exists('apps/my-app/README.md')).toBeTruthy();
       expect(tree.read('apps/my-app/README.md').toString())
         .toMatchInlineSnapshot(`
-      "# my-app
+        "# my-app
 
-      This application was generated with [Nx](https://nx.dev) and the [.NET Core plugin](https://github.com/bbaia/nx-dotnet-core).
+        This application was generated with [Nx](https://nx.dev) and the [.NET Core plugin](https://github.com/bbaia/nx-dotnet-core).
+
+        ## Restore
+
+        Run \`nx restore my-app\` to restore the dependencies and tools of the project.
 
 
-      ## Development server
+        ## Development server
 
-      Run \`nx serve my-app\` to serve the app. The app will automatically reload if you change any of the source files.
+        Run \`nx serve my-app\` to serve the app. The app will automatically reload if you change any of the source files.
 
 
-      ## Build
+        ## Build
 
-      Run \`nx build my-app\` to build the project. The build artifacts will be stored in the \`dist/\` directory. Use the \`--prod\` flag for a production build.
+        Run \`nx build my-app\` to build the project. The build artifacts will be stored in the \`dist/\` directory. Use the \`--prod\` flag for a production build.
 
-      "
-    `);
+        "
+      `);
     });
 
     it('should update workspace.json', async () => {
@@ -94,6 +98,12 @@ describe('new generator', () => {
         sourceRoot: 'apps/my-app/src',
         tags: [],
         targets: {
+          restore: {
+            executor: '@bbaia/nx-dotnet-core:restore',
+            options: {
+              project: 'apps/my-app',
+            },
+          },
           build: {
             executor: '@bbaia/nx-dotnet-core:build',
             outputs: ['{options.outputPath}'],
@@ -135,6 +145,19 @@ describe('new generator', () => {
         'my-app': { tags: [] },
       });
     });
+
+    it('should update package.json', async () => {
+      const options: NewGeneratorSchema = {
+        type: 'app',
+        template: 'webapi',
+        name: 'my-app',
+      };
+
+      await generator(tree, options);
+
+      const packageJson = readJson(tree, '/package.json');
+      expect(packageJson.scripts.postinstall).toEqual('nx restore --all');
+    });
   });
 
   describe('library', () => {
@@ -171,17 +194,21 @@ describe('new generator', () => {
       expect(tree.exists('libs/my-lib/README.md')).toBeTruthy();
       expect(tree.read('libs/my-lib/README.md').toString())
         .toMatchInlineSnapshot(`
-      "# my-lib
+        "# my-lib
 
-      This library was generated with [Nx](https://nx.dev) and the [.NET Core plugin](https://github.com/bbaia/nx-dotnet-core).
+        This library was generated with [Nx](https://nx.dev) and the [.NET Core plugin](https://github.com/bbaia/nx-dotnet-core).
+
+        ## Restore
+
+        Run \`nx restore my-lib\` to restore the dependencies and tools of the project.
 
 
-      ## Build
+        ## Build
 
-      Run \`nx build my-lib\` to build the project. The build artifacts will be stored in the \`dist/\` directory. Use the \`--prod\` flag for a production build.
+        Run \`nx build my-lib\` to build the project. The build artifacts will be stored in the \`dist/\` directory. Use the \`--prod\` flag for a production build.
 
-      "
-    `);
+        "
+      `);
     });
 
     it('should update workspace.json', async () => {
@@ -201,6 +228,12 @@ describe('new generator', () => {
         sourceRoot: 'libs/my-lib/src',
         tags: [],
         targets: {
+          restore: {
+            executor: '@bbaia/nx-dotnet-core:restore',
+            options: {
+              project: 'libs/my-lib',
+            },
+          },
           build: {
             executor: '@bbaia/nx-dotnet-core:build',
             outputs: ['{options.outputPath}'],
@@ -235,6 +268,19 @@ describe('new generator', () => {
       expect(nxJson.projects).toEqual({
         'my-lib': { tags: [] },
       });
+    });
+
+    it('should update package.json', async () => {
+      const options: NewGeneratorSchema = {
+        type: 'lib',
+        template: 'classlib',
+        name: 'my-lib',
+      };
+
+      await generator(tree, options);
+
+      const packageJson = readJson(tree, '/package.json');
+      expect(packageJson.scripts.postinstall).toEqual('nx restore --all');
     });
   });
 
@@ -282,6 +328,10 @@ describe('new generator', () => {
         "# my-lib
 
         This library was generated with [Nx](https://nx.dev) and the [.NET Core plugin](https://github.com/bbaia/nx-dotnet-core).
+
+        ## Restore
+
+        Run \`nx restore my-lib\` to restore the dependencies and tools of the project.
 
 
         ## Build

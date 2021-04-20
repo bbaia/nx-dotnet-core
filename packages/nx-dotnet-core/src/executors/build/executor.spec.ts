@@ -11,6 +11,8 @@ describe('Build Executor', () => {
     const options: BuildExecutorSchema = {
       project: 'my-app',
       outputPath: 'dist/my-app',
+      configuration: 'DEBUG',
+      noRestore: false,
     };
     const output = await executor(options);
     expect(output.success).toBe(true);
@@ -18,7 +20,8 @@ describe('Build Executor', () => {
     expect(dotnet.publish).toBeCalledWith(
       options.project,
       options.outputPath,
-      undefined,
+      options.configuration,
+      options.noRestore,
     );
   });
 });

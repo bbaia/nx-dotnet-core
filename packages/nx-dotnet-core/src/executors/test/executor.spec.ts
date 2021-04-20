@@ -12,23 +12,29 @@ describe('Test Executor', () => {
     const options: TestExecutorSchema = {
       project: 'my-app',
       watch: false,
+      noRestore: false,
     };
     const output = await executor(options);
     expect(output.success).toBe(true);
     expect(dotnet.test).toBeCalledTimes(1);
     expect(dotnet.watch).toBeCalledTimes(0);
-    expect(dotnet.test).toBeCalledWith(options.project);
+    expect(dotnet.test).toBeCalledWith(options.project, options.noRestore);
   });
 
   it('should call dotnet watch test', async () => {
     const options: TestExecutorSchema = {
       project: 'my-app',
       watch: true,
+      noRestore: false,
     };
     const output = await executor(options);
     expect(output.success).toBe(true);
     expect(dotnet.test).toBeCalledTimes(0);
     expect(dotnet.watch).toBeCalledTimes(1);
-    expect(dotnet.watch).toBeCalledWith(options.project, 'test');
+    expect(dotnet.watch).toBeCalledWith(
+      options.project,
+      'test',
+      options.noRestore,
+    );
   });
 });

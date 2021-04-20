@@ -31,6 +31,9 @@ describe('new e2e', () => {
     const extensionsJson = readJson('.vscode/extensions.json');
     expect(extensionsJson.recommendations).toContain('ms-dotnettools.csharp');
 
+    const packageJson = readJson('package.json');
+    expect(packageJson.scripts.postinstall).toEqual('nx restore --all');
+
     const result = await runNxCommandAsync(`build ${plugin}`);
     expect(() =>
       checkFilesExist(
@@ -58,6 +61,9 @@ describe('new e2e', () => {
 
     const extensionsJson = readJson('.vscode/extensions.json');
     expect(extensionsJson.recommendations).toContain('ms-dotnettools.csharp');
+
+    const packageJson = readJson('package.json');
+    expect(packageJson.scripts.postinstall).toEqual('nx restore --all');
 
     const result = await runNxCommandAsync(`build ${plugin}`);
     expect(() =>
