@@ -44,6 +44,11 @@
                 "input": "./packages/nx-dotnet-core",
                 "glob": "executors.json",
                 "output": "."
+              },
+              {
+                "input": "./packages/nx-dotnet-core",
+                "glob": "migrations.json",
+                "output": "."
               }
             ]
           }

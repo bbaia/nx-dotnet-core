@@ -9,6 +9,10 @@
   "typings": "./src/index.d.ts",
   "generators": "./generators.json",
   "executors": "./executors.json",
+  "ng-update": {
+    "requirements": {},
+    "migrations": "./migrations.json"
+  },
   "homepage": "https://github.com/bbaia/nx-dotnet-core",
   "bugs": {
     "url": "https://github.com/bbaia/nx-dotnet-core/issues"
