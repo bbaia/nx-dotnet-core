@@ -186,7 +186,7 @@ function addPostInstall(host: Tree) {
   updateJson(host, 'package.json', json => {
     json.scripts = json.scripts || {};
     const command = json.scripts.ng
-      ? 'nx affected --target=restore --all'
+      ? 'nx run-many --target=restore --all'
       : 'nx restore --all';
     if (!json.scripts.postinstall) {
       json.scripts.postinstall = command;

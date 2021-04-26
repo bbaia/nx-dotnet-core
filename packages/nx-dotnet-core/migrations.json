@@ -1,0 +1,9 @@
+{
+  "schematics": {
+    "update-restore-postinstall": {
+      "version": "1.1.1",
+      "description": "Use 'nx run-many' instead of 'nx affected' to restore .NET core projects when using Angular CLI",
+      "factory": "./src/migrations/update-1-1-1/update-restore-postinstall"
+    }
+  }
+}

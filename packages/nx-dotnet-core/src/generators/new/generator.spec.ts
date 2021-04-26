@@ -4,6 +4,7 @@ import {
   readJson,
   readProjectConfiguration,
   Tree,
+  updateJson,
   writeJson,
 } from '@nrwl/devkit';
 
@@ -145,19 +146,6 @@ describe('new generator', () => {
         'my-app': { tags: [] },
       });
     });
-
-    it('should update package.json', async () => {
-      const options: NewGeneratorSchema = {
-        type: 'app',
-        template: 'webapi',
-        name: 'my-app',
-      };
-
-      await generator(tree, options);
-
-      const packageJson = readJson(tree, '/package.json');
-      expect(packageJson.scripts.postinstall).toEqual('nx restore --all');
-    });
   });
 
   describe('library', () => {
@@ -269,19 +257,6 @@ describe('new generator', () => {
         'my-lib': { tags: [] },
       });
     });
-
-    it('should update package.json', async () => {
-      const options: NewGeneratorSchema = {
-        type: 'lib',
-        template: 'classlib',
-        name: 'my-lib',
-      };
-
-      await generator(tree, options);
-
-      const packageJson = readJson(tree, '/package.json');
-      expect(packageJson.scripts.postinstall).toEqual('nx restore --all');
-    });
   });
 
   describe('--unitTestTemplate', () => {
@@ -378,6 +353,37 @@ describe('new generator', () => {
             },
           }),
         }),
+      );
+    });
+  });
+
+  describe('should update postinstall script in package.json', () => {
+    const options: NewGeneratorSchema = {
+      type: 'app',
+      template: 'webapi',
+      name: 'my-app',
+    };
+
+    it('Nx workspace', async () => {
+      await generator(tree, options);
+
+      const packageJson = readJson(tree, '/package.json');
+      expect(packageJson.scripts.postinstall).toEqual('nx restore --all');
+    });
+
+    it('Angular CLI powered workspace', async () => {
+      // fake Angular CLI powered workspace
+      updateJson(tree, '/package.json', json => {
+        console.log(json);
+        json.scripts = { ng: 'nx' };
+        return json;
+      });
+
+      await generator(tree, options);
+
+      const packageJson = readJson(tree, '/package.json');
+      expect(packageJson.scripts.postinstall).toEqual(
+        'nx run-many --target=restore --all',
       );
     });
   });
