@@ -64,6 +64,14 @@ nx g @bbaia/nx-dotnet-core:new app webapi api --unitTestTemplate nunit
 
 You will find more information on the generated `README.md` file.
 
+## Updating `@bbaia/nx-dotnet-core`
+
+This plugin supports [`nx migrate`](https://nx.dev/latest/angular/core-concepts/updating-nx)
+
+```
+nx migrate @bbaia/nx-dotnet-core
+```
+
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
