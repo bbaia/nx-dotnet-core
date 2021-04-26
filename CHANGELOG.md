@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/bbaia/nx-dotnet-core/compare/v1.1.0...v1.1.1) (2021-04-26)
+
+
+### Bug Fixes
+
+* use `nx run-many` vs `nx affected` in postinstall script ([165363b](https://github.com/bbaia/nx-dotnet-core/commit/165363b2c2ce7492cab9af8dab0eedc0619a1623))
+
 # [1.1.0](https://github.com/bbaia/nx-dotnet-core/compare/v1.0.0...v1.1.0) (2021-04-26)
 
 
