@@ -34,7 +34,7 @@ module.exports = {
       {
         assets: ['CHANGELOG.md', `${srcPackagePath}/package.json`],
         message:
-          'chore(release): ${nextRelease.version}\n\n${nextRelease.notes}',
+          'chore: release ${nextRelease.version}\n\n${nextRelease.notes}',
       },
     ],
     [
